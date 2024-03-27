@@ -15,7 +15,7 @@ interface IDropdownProps {
     ctx: RenderFieldExtensionCtx;
 }
 
-const SimpleDropdown: React.FC<IDropdownProps> = ({numberOfOptions, ctx}) => {
+const SimpleDropdownManual: React.FC<IDropdownProps> = ({numberOfOptions, ctx}) => {
     // Generate an array of options based on the numberOfOptions prop
     const options: IDropdownOption[] = Array.from({length: numberOfOptions}, (_, index) => ({
         id: `option-${index + 1}`,
@@ -41,7 +41,7 @@ const SimpleDropdown: React.FC<IDropdownProps> = ({numberOfOptions, ctx}) => {
                             }}
                             rightIcon={open ? <CaretUpIcon/> : <CaretDownIcon/>}
                         >
-                            {selectedOption.text} {/* Reflecting the selected option text */}
+                            Manual iframe resizing
                         </Button>
                     )}
                 >
@@ -61,4 +61,4 @@ const SimpleDropdown: React.FC<IDropdownProps> = ({numberOfOptions, ctx}) => {
     );
 };
 
-export default SimpleDropdown;
+export default SimpleDropdownManual;
