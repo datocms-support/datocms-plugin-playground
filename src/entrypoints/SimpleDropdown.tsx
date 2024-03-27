@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Button,
     Dropdown,
@@ -33,17 +33,23 @@ const SimpleDropdown: React.FC<IDropdownProps> = ({ numberOfOptions , ctx}) => {
 
     const handleChange = (option: IDropdownOption) => {
         setSelectedOption(option);
+        ctx.startAutoResizer();
     };
+
+    useEffect(() => {
+        console.log(ctx)
+    }, [ctx])
 
     return (
         <Canvas ctx={ctx}>
-            <h2>Test</h2>
-            <div>
             {options.length > 1 && (
                 <Dropdown
                     renderTrigger={({ open, onClick }) => (
                         <Button
-                            onClick={onClick}
+                            onClick={() => {
+                                ctx.stopAutoResizer()
+                                ctx.setHeight(300).then(() => onClick())
+                            }}
                             rightIcon={open ? <CaretUpIcon /> : <CaretDownIcon />}
                         >
                             {selectedOption.text} {/* Reflecting the selected option text */}
@@ -62,7 +68,6 @@ const SimpleDropdown: React.FC<IDropdownProps> = ({ numberOfOptions , ctx}) => {
                     </DropdownMenu>
                 </Dropdown>
             )}
-            </div>
         </Canvas>
     );
 };
