@@ -1,12 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-    Button,
-    Dropdown,
-    DropdownOption,
-    DropdownMenu,
-    CaretUpIcon,
-    CaretDownIcon, Canvas,
-} from 'datocms-react-ui';
+import React, {useState} from 'react';
+import {Button, Canvas, CaretDownIcon, CaretUpIcon, Dropdown, DropdownMenu, DropdownOption,} from 'datocms-react-ui';
 import 'datocms-react-ui/styles.css';
 import {RenderFieldExtensionCtx} from "datocms-plugin-sdk";
 
@@ -22,9 +15,9 @@ interface IDropdownProps {
     ctx: RenderFieldExtensionCtx;
 }
 
-const SimpleDropdown: React.FC<IDropdownProps> = ({ numberOfOptions , ctx}) => {
+const SimpleDropdown: React.FC<IDropdownProps> = ({numberOfOptions, ctx}) => {
     // Generate an array of options based on the numberOfOptions prop
-    const options: IDropdownOption[] = Array.from({ length: numberOfOptions }, (_, index) => ({
+    const options: IDropdownOption[] = Array.from({length: numberOfOptions}, (_, index) => ({
         id: `option-${index + 1}`,
         text: `Option ${index + 1}`,
     }));
@@ -33,24 +26,20 @@ const SimpleDropdown: React.FC<IDropdownProps> = ({ numberOfOptions , ctx}) => {
 
     const handleChange = (option: IDropdownOption) => {
         setSelectedOption(option);
-        ctx.startAutoResizer();
+        ctx.startAutoResizer(); // Shrink it back down on selection
     };
-
-    useEffect(() => {
-        console.log(ctx)
-    }, [ctx])
 
     return (
         <Canvas ctx={ctx}>
             {options.length > 1 && (
                 <Dropdown
-                    renderTrigger={({ open, onClick }) => (
+                    renderTrigger={({open, onClick}) => (
                         <Button
                             onClick={() => {
-                                ctx.stopAutoResizer()
-                                ctx.setHeight(300).then(() => onClick())
+                                ctx.stopAutoResizer() // If we don't stop it, the autosizer will keep fighting us
+                                ctx.setHeight(300).then(() => onClick()) // The height determines how many options are shown at once
                             }}
-                            rightIcon={open ? <CaretUpIcon /> : <CaretDownIcon />}
+                            rightIcon={open ? <CaretUpIcon/> : <CaretDownIcon/>}
                         >
                             {selectedOption.text} {/* Reflecting the selected option text */}
                         </Button>
