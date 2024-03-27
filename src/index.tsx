@@ -2,6 +2,7 @@ import {connect} from 'datocms-plugin-sdk';
 import {render} from './utils/render';
 import SimpleDropdownManual from "./entrypoints/SimpleDropdownManual";
 import SimpleDropdownAuto from "./entrypoints/SimpleDropdownAuto";
+import ShowHideIframe from "./entrypoints/ShowHideIframe";
 
 connect({
 
@@ -21,6 +22,12 @@ connect({
                 fieldTypes: ['text', 'string']
 
             },
+            {
+                id: 'ShowHideIframe',
+                name: 'Show/Hide iframe',
+                type: 'addon',
+                fieldTypes: ['boolean']
+            },
         ]
     },
 
@@ -30,6 +37,8 @@ connect({
                 return render(<SimpleDropdownManual numberOfOptions={10} ctx={ctx}/>);
             case 'SimpleDropdownAuto':
                 return render(<SimpleDropdownAuto numberOfOptions={10} ctx={ctx}/>);
+            case 'ShowHideIframe':
+                return render(<ShowHideIframe ctx={ctx}/>);
         }
     },
 });
