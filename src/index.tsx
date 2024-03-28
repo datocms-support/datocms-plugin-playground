@@ -4,6 +4,7 @@ import SimpleDropdownManual from "./entrypoints/SimpleDropdownManual";
 import SimpleDropdownAuto from "./entrypoints/SimpleDropdownAuto";
 import ShowHideIframe from "./entrypoints/ShowHideIframe";
 import {DynamicSelectField} from "./entrypoints/DynamicSelectField";
+import {DynamicFieldHider} from "./entrypoints/DynamicFieldHider";
 
 connect({
 
@@ -51,4 +52,26 @@ connect({
                 return render(<DynamicSelectField ctx={ctx}/>);
         }
     },
+
+    itemFormOutlets(model, ctx) {
+        switch (model.attributes.api_key) {
+            case 'dynamic_select':
+                return [
+                    {
+                        id: 'DynamicFieldHider',
+                        initialHeight: 0,
+                    }]
+
+            default:
+                return [];
+        }
+    },
+
+    renderItemFormOutlet(
+        outletId,
+        ctx,
+    ) {
+        render(<DynamicFieldHider ctx={ctx}/>);
+    },
+
 });

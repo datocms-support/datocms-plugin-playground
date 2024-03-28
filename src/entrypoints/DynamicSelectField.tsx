@@ -1,7 +1,7 @@
 import {RenderFieldExtensionCtx} from "datocms-plugin-sdk";
 import {Canvas, SelectField} from "datocms-react-ui";
 import {get} from "lodash-es";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 type PropTypes = {
     ctx: RenderFieldExtensionCtx;
@@ -44,18 +44,7 @@ export function DynamicSelectField({ctx}: PropTypes) {
         );
     };
 
-    // Manage the visibility of the field editor based on currentValue.options
-    /*    useEffect(() => {
-            if (options.length === 0) {
-                ctx.toggleField(ctx.fieldPath, false); // If I toggle it off, it never will get updated once options.length > 0
-                ctx.stopAutoResizer();
-                ctx.updateHeight(0);
-            } else {
-                ctx.toggleField(ctx.fieldPath, true); // I never reach this point
-                ctx.startAutoResizer();
-            }
-        }, [options, ctx.fieldPath, ctx.formValues]);*/
-
+    // Simulate an async fetch
     useEffect(() => {
         setTimeout(() => {
             if (!options.length) {
