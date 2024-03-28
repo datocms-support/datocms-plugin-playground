@@ -3,6 +3,7 @@ import {render} from './utils/render';
 import SimpleDropdownManual from "./entrypoints/SimpleDropdownManual";
 import SimpleDropdownAuto from "./entrypoints/SimpleDropdownAuto";
 import ShowHideIframe from "./entrypoints/ShowHideIframe";
+import {DynamicSelectField} from "./entrypoints/DynamicSelectField";
 
 connect({
 
@@ -28,6 +29,13 @@ connect({
                 type: 'addon',
                 fieldTypes: ['boolean']
             },
+            {
+                id: 'DynamicSelectField',
+                name: 'Dynamic Select Field',
+                type: 'editor',
+                fieldTypes: ['json']
+            },
+
         ]
     },
 
@@ -39,6 +47,8 @@ connect({
                 return render(<SimpleDropdownAuto numberOfOptions={10} ctx={ctx}/>);
             case 'ShowHideIframe':
                 return render(<ShowHideIframe ctx={ctx}/>);
+            case 'DynamicSelectField':
+                return render(<DynamicSelectField ctx={ctx}/>);
         }
     },
 });
