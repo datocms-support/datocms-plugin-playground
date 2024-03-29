@@ -1,3 +1,1 @@
-# [Your plugin name]
-
-[Describe what your plugin does, and how users you can configure it! Screenshots are always welcome!]
+A variety of simple plugins to test Plugin SDK features for customers.
